@@ -1,6 +1,6 @@
 _**CURL4SCRAPY**_
 
-&rarr; curl code converted to crapy code, in scrapy.Spider class format.
+&rarr; cURL code converted to Scrapy code, in scrapy.Spider class format.
 
 &rarr; Forked from https://github.com/michael-shub/curl2scrapy/ (logic with js).
 
