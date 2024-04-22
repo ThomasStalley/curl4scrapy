@@ -2,89 +2,166 @@
 <html>
 
 <style>
-    .center-text {
-        text-align: center;
-    }
-
-    #curl,
-    #scrapy {
-        font-size: "10px";
-    }
-
-    #submit-button {
-        text-align: center;
-        width: 100%;
-        background: #e5e5e5;
-        margin-top: 2px;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-        height: calc(1.5em + .75rem + 2px);
-    }
-
-    #submit-button:active {
-        text-align: center;
-        width: 100%;
-        background: white;
-        margin-top: 2px;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-        height: calc(1.5em + .75rem + 2px);
-    }
-
-    @font-face {
-        font-family: 'LCD Font';
-        src: url('lcd_font.ttf') format('truetype');
-    }
-
+    /* CURL4SCRAPY */
     * {
         font-family: "Courier New", monospace;
     }
 
-    .lcd {
-        font-family: 'LCD Font', cursive;
+    .center-text {
+        text-align: center;
     }
 
-    .github-corner:hover .octo-arm {
-        animation: octocat-wave 560ms ease-in-out
+    #scrapy {
+        font-size: "10px";
     }
 
+    #curl {
+        width: 800%;
+        font-size: "10px";
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+
+    #submitButton {
+        text-align: center;
+        width: 100%;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        height: calc(1.5em + 1.75rem + 2px);
+    }
+
+    #submitButton:active {
+        text-align: center;
+        width: 100%;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        height: calc(1.5em + 1.75rem + 2px);
+    }
+
+    @font-face {
+        font-family: 'LCD Font';
+        src: url('assets/lcd_font.ttf') format('truetype');
+    }
+
+    label {
+        color: white;
+    }
+
+    .flex-group {
+        display: flex;
+        align-items: center;
+    }
+
+    /* LOADING */
     #pyscript_loading_splash {
         display: none;
     }
 
-    .spinner-container {
+    #blackScreen {
         position: fixed;
-        top: 30%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        width: 100px;
-        height: 100px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: rgb(0, 0, 0);
+        z-index: 5000;
     }
 
-    .spinner {
-        margin: 10px auto;
-        width: 50px;
-        height: 50px;
-        border: 5px solid #e1dddd;
-        border-top: 5px solid #000000;
-        border-radius: 50%;
-        animation: spin 2s linear infinite;
-        position: relative;
+    #loadingGif {
+        background: url('assets/loading.gif') no-repeat center center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999999;
     }
 
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
+    /* DARK THEMES */
+    .dark_mode_title {
+        font-family: 'LCD Font', cursive;
+        color: #05aa05;
+    }
 
-        100% {
-            transform: rotate(360deg);
-        }
+    .dark_mode_button {
+        position: absolute;
+        bottom: 1px;
+        left: 1px;
+        background: transparent;
+        border: none;
+        font-size: 16px;
+        color: #05aa05;
+    }
+
+    .dark_mode_body {
+        background-color: black !important;
+        color: white !important;
+    }
+
+    .dark_mode_textarea {
+        background-color: black !important;
+        color: white !important;
+    }
+
+    .dark_mode_label {
+        color: white !important;
+    }
+
+    .dark_mode_github {
+        position: absolute;
+        bottom: 1px;
+        right: 1px;
+        background: transparent;
+        border: none;
+        font-size: 16px;
+        color: #05aa05;
+        text-decoration: none;
+    }
+
+    /* LIGHT THEMES */
+    .light_mode_title {
+        font-family: 'LCD Font', cursive;
+        color: #df520d;
+    }
+
+    .light_mode_button {
+        position: absolute;
+        bottom: 1px;
+        left: 1px;
+        background: transparent;
+        border: none;
+        font-size: 16px;
+        color: #df520d;
+    }
+
+    .light_mode_body {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    .light_mode_textarea {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    .light_mode_label {
+        color: black !important;
+    }
+
+    .light_mode_github {
+        position: absolute;
+        bottom: 1px;
+        right: 1px;
+        background: transparent;
+        border: none;
+        font-size: 16px;
+        color: #df520d;
+        text-decoration: none;
+    }
+
+    /* GITHUB */
+    .github-corner:hover .octo-arm {
+        animation: octocat-wave 560ms ease-in-out
     }
 
     @keyframes octocat-wave {
@@ -137,60 +214,115 @@
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 </head>
 
-<body>
+<body class="dark_mode_body">
+    <!-- LOADING -->
+    <div id="blackScreen"></div>
+    <div id="loadingGif"></div>
     <section class="pyscript">
         <div class="container">
-            <!-- GITHUB -->
-            <a href="https://github.com/ThomasStalley/curl4scrapy" class="github-corner"
-                aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250"
-                    style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
-                    aria-hidden="true">
-                    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-                    <path
-                        d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-                        fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-                    <path
-                        d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-                        fill="currentColor" class="octo-body"></path>
-                </svg>
-            </a>
             <!-- CURL4SCRAPY -->
             <div>
-                <h1 class="center-text lcd">CURL4SCRAPY</h1>
+                <a href=" https://thomasstalley.github.io/curl4scrapy/">
+                    <h1 id="title" class="center-text dark_mode_title">CURL4SCRAPY</h1>
+                </a>
             </div>
-            <div id="spinner" style="display: block;">
-                <div class="spinner-container">
-                    <div class="spinner"></div>
-                </div>
-            </div>
-            <div id="main" class="col-md" style="display: none;">
-                <div class="form-group">
-                    <label for="curl">curl source:</label>
-                    <br />
-                    <textarea id="curl" type="text" class="form-control" rows="1"
+            <div id="main" class="col-md">
+                <label for="curl" class="dark_mode_label">curl source:</label>
+                <div class="form-group flex-group">
+                    <textarea id="curl" type="text" class="form-control dark_mode_textarea" rows="1"
                         placeholder="paste the curl request here..."></textarea>
-                    <button id="submit-button" type="submit" pys-onClick="main">...</button>
+                    <button id="submitButton" type="submit" pys-onClick="main">...</button>
                 </div>
+                <label for="scrapy" class="dark_mode_label">scrapy code:</label>
                 <div class="form-group">
-                    <label for="scrapy">scrapy code:</label>
-                    <textarea id="scrapy" class="form-control" rows="20"
+                    <textarea id="scrapy" class="form-control dark_mode_textarea" rows="20"
                         placeholder="...and your scrapy code will appear here"></textarea>
                 </div>
             </div>
+            <!-- TOGGLE THEME -->
+            <button onclick="toggleTheme()" id="themeToggle" class="dark_mode_button">light/dark mode</button>
+            <!-- GITHUB -->
+            <a id="github" href="https://github.com/ThomasStalley/curl4scrapy" target="_blank" class="dark_mode_github">
+                github source code
+            </a>
         </div>
-        <py-script src="curl4scrapy.py"> </py-script>
+        <py-script src="curl4scrapy.py"></py-script>
+        <!-- LOADING -->
         <script>
-            // allow 5s for pyscript then hide spinner div:
-            var spinner = document.getElementById("spinner");
-            setTimeout(function () { hide(spinner); }, 5000);
+            // show loading gif for 7s to allow pyscript time:
+            var loadingGif = document.getElementById("loadingGif");
+            setTimeout(function () { hide(loadingGif); }, 7000);
             function hide(element) {
                 element.style.display = "none";
             }
-            // allow 5s for pyscript then show main div:
-            var main = document.getElementById("main");
-            setTimeout(function () { show(main); }, 5000);
-            function show(element) {
-                element.style.display = "block";
+            // show black screen behind loading gif:
+            var blackScreen = document.getElementById("blackScreen");
+            setTimeout(function () { hide(blackScreen); }, 7000);
+            function hide(element) {
+                element.style.display = "none";
+            }
+        </script>
+        <!-- TOGGLE THEME -->
+        <script>
+            function toggleTheme() {
+                // Toggle the title theme:
+                var title = document.getElementById("title");
+                if (title.classList.contains('dark_mode_title')) {
+                    title.classList.remove('dark_mode_title');
+                    title.classList.add('light_mode_title');
+                } else {
+                    title.classList.remove('light_mode_title');
+                    title.classList.add('dark_mode_title');
+                }
+                // Toggle the theme button:
+                var button = document.getElementById("themeToggle");
+                if (button.classList.contains('dark_mode_button')) {
+                    button.classList.remove('dark_mode_button');
+                    button.classList.add('light_mode_button');
+                } else {
+                    button.classList.remove('light_mode_button');
+                    button.classList.add('dark_mode_button');
+                }
+                // Toggle the body theme:
+                var body = document.body;
+                if (body.classList.contains('dark_mode_body')) {
+                    body.classList.remove('dark_mode_body');
+                    body.classList.add('light_mode_body');
+                } else {
+                    body.classList.remove('light_mode_body');
+                    body.classList.add('dark_mode_body');
+                }
+                // Toggle the textarea theme:
+                var textareas = document.querySelectorAll('textarea');
+                textareas.forEach(function (textarea) {
+                    if (textarea.classList.contains('dark_mode_textarea')) {
+                        textarea.classList.remove('dark_mode_textarea');
+                        textarea.classList.add('light_mode_textarea');
+                    } else {
+                        textarea.classList.remove('light_mode_textarea');
+                        textarea.classList.add('dark_mode_textarea');
+                    }
+                });
+                // Toggle the label theme:
+                var label = document.querySelectorAll('label');
+                label.forEach(function (label) {
+                    if (label.classList.contains('dark_mode_label')) {
+                        label.classList.remove('dark_mode_label');
+                        label.classList.add('light_mode_label');
+                    } else {
+                        label.classList.remove('light_mode_label');
+                        label.classList.add('dark_mode_label');
+                    }
+                });
+                // Toggle the GitHub theme:
+                var github = document.getElementById('github');
+                if (github.classList.contains('dark_mode_github')) {
+                    github.classList.remove('dark_mode_github');
+                    github.classList.add('light_mode_github');
+                } else {
+                    github.classList.remove('light_mode_github');
+                    github.classList.add('dark_mode_github');
+                }
             }
         </script>
     </section>
