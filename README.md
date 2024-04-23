@@ -5,8 +5,5 @@ _**CURL4SCRAPY**_\
 
 _**next steps:**_\
 &rarr; complete logic in python.\
-&rarr; make title clickable.\
 &rarr; run the conversion on enter or paste.\
-&rarr; cool green and black old school style.\
-&rarr; light mode dark mode.\
 &rarr; fake typing generation.
